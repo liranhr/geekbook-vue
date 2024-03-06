@@ -2,7 +2,7 @@
   <div class="app-container">
     <div>
       <p class="pragraph-header">צעד {{step}} מתוך 6</p>
-      <button class="button-header">יציאה</button>
+      <v-btn variant="text" class="button-header" size="large">יציאה</v-btn>
     </div>
     <router-view></router-view>
   </div>
@@ -27,9 +27,11 @@ export default {
 }
 .pragraph-header{
   float: left;
-  margin: auto;
+  margin: 6px;
+  font-family: initial;
 }
 .button-header{
   float: right;
-}
+  font-family: initial;
+  }
 </style>
