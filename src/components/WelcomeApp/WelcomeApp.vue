@@ -1,74 +1,74 @@
 <template>
   <div>
-    <div class="welcome-page-container">
-      <img style="margin-bottom: 22px;" src="../../assets/Group.png" alt="">
-      <p style="margin-bottom: 22px;" class="welcome-header">מצא את הספר המדויק עבורך.</p>
-      <div class="welcome-continue-button">
-        <v-btn
-          :disabled="loading"
-          :loading="loading"
-          class="text-none mb-4"
-          color="black"
-          size="x-large"
-          variant="flat"
-          block
-          @click="loading = !loading"
-        >
-          המשך
-        </v-btn>
-      </div>
-      <div>
+    <p class="pragraph-header">צעד {{step}} מתוך 6</p>
+    <div>
+      <v-btn v-if="step != 1" variant="text" class="button-header-back" size="large" @click="stepUpDown(false)" >חזרה</v-btn>
+      <v-btn variant="text" class="button-header-exit" size="large">יציאה</v-btn>
+    </div>
+    <div>
+      <v-progress-linear
+        v-if="step != 1"
+        v-model="progress"
+        :buffer-value="bufferValue"
+        color="purple"
+      ></v-progress-linear>
+    </div>
+    <StepOne @stepUpDown="stepUpDown" v-if="step == 1"/>
+    <div class="bottom-class">
         <div>
           <p class="welcome-existing-user">כבר יש לך משתמש?</p> 
           <a class="welcome-signin-link" href="">היכנס</a>
         </div>
         <a class="welcome-guest-link" href="">או היכנס כאורח</a>
       </div>
-    </div>
   </div>
 </template>
 
 <script>
+import StepOne from './Steps/StepOne'
 export default {
-
+  name: 'App',
+  data(){
+    return{
+      step: 1,
+      progress: 100/6
+    }
+  },
+  components: {
+    StepOne
+  },
+  methods:{
+    stepUpDown(upOrDown){
+      if(upOrDown === false){
+        this.step--;
+      }else{
+        this.step++;
+      }
+    },
+    getStep(){
+      return this.step
+    }
+  }
 }
 </script>
 
 <style>
-.welcome-page-container{
-    position: fixed;
+.bottom-class{
+    position: absolute;
     text-align: center;
+    bottom: 20px;
     width: 100%;
-    top: 40%;
-    margin-top: -161.5px;
 }
-
-.welcome-page-container .welcome-header{
-    font-size: 34px;
-    text-shadow: 0px 1px 5px rgb(138,138,138);
-    direction: rtl;
+.pragraph-header{
+  margin: 6px;
+  font-family: initial;
 }
-
-.welcome-continue-button{
-    width: 88%;
-    margin: auto;
+.button-header-exit{
+  float: right;
+  font-family: initial;
 }
-
-.welcome-existing-user{
-  direction: rtl;
-  display: inline;
+.button-header-back{
+  float: left;
+  font-family: initial;
 }
-
-.welcome-signin-link{
-    font-weight: bold;
-    color: black;
-    margin-right: 5px;
-}
-
-.welcome-guest-link{
-  font-weight: bold;
-  color: black;
-  margin-right: 5px;
-}
-
 </style>
