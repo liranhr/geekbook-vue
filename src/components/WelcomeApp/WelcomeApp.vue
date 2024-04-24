@@ -14,6 +14,8 @@
       ></v-progress-linear>
     </div>
     <StepOne @stepUpDown="stepUpDown" v-if="step == 1"/>
+    <StepTwo @stepUpDown="stepUpDown" v-if="step == 2"/>
+    <StepThree @stepUpDown="stepUpDown" v-if="step == 3"/>
     <div class="bottom-class">
         <div>
           <p class="welcome-existing-user">כבר יש לך משתמש?</p> 
@@ -26,6 +28,8 @@
 
 <script>
 import StepOne from './Steps/StepOne'
+import StepTwo from './Steps/StepTwo'
+import StepThree from'./Steps/StepThree'
 export default {
   name: 'App',
   data(){
@@ -35,7 +39,9 @@ export default {
     }
   },
   components: {
-    StepOne
+    StepOne,
+    StepTwo,
+    StepThree
   },
   methods:{
     stepUpDown(upOrDown){
